@@ -1,6 +1,6 @@
 const AuthorsService = {
   getAllAuthors(knexInstance) {
-      return knexInstance.select('*').from('Authors')
+      return knexInstance.select('*').from('Books')
   },
 
   insertAuthor(knexInstance, newAuthor) {
@@ -15,7 +15,7 @@ const AuthorsService = {
 
   getById(knexInstance, AuthorsID) {
       return knexInstance
-          .from('Authors')
+          .from('Books')
           .select('*')
           .where('id', AuthorsID)
           .first()

@@ -47,38 +47,38 @@ describe('authors Endpoints', () => {
       })
     })
 
-    context(`Given an XSS attack folder`, () => {
-      const maliciousFolder = {
+    context(`Given an XSS attack author`, () => {
+      const maliciousauthor = {
         id: 912,
-        folder_name: 'Naughty naughty very naughty <script>alert("xss");</script>',
+        author_name: 'Naughty naughty very naughty <script>alert("xss");</script>',
       }
       const sanitizedauthors = [{
         id: 912,
-        folder_name: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;',
+        author_name: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;',
       }]
-      beforeEach('insert malicious folder', () => {
+      beforeEach('insert malicious author', () => {
         return db
           .into('authors')
-          .insert([maliciousFolder])
+          .insert([maliciousauthor])
       })
       it('responds with 200 and all of the authors, none of which contains XSS attack content', () => {
         return supertest(app)
           .get('/api/authors')
           .expect(200)
           .expect(res => {
-            expect(res.body[0].folder_name).to.eql(sanitizedauthors[0].folder_name)
+            expect(res.body[0].author_name).to.eql(sanitizedauthors[0].author_name)
           })
       })
     })
   })
 
-  describe(`GET /api/authors/:folder_id`, () => {
+  describe(`GET /api/authors/:author_id`, () => {
     context(`Given no authors`, () => {
       it(`responds with 404`, () => {
-        const folderId = 123456
+        const authorId = 123456
         return supertest(app)
-          .get(`/api/authors/${folderId}`)
-          .expect(404, { error: { message: `Folder doesn't exist` } })
+          .get(`/api/authors/${authorId}`)
+          .expect(404, { error: { message: `author doesn't exist` } })
       })
     })
 
@@ -89,49 +89,49 @@ describe('authors Endpoints', () => {
           .into('authors')
           .insert(testauthors)
       })
-      it('responds with 200 and the specified folder', () => {
-        const folderId = 2
-        const expectedFolder = testauthors[folderId - 1]
+      it('responds with 200 and the specified author', () => {
+        const authorId = 2
+        const expectedauthor = testauthors[authorId - 1]
         return supertest(app)
-          .get(`/api/authors/${folderId}`)
-          .expect(200, expectedFolder)
+          .get(`/api/authors/${authorId}`)
+          .expect(200, expectedauthor)
       })
     })
 
-    context(`Given an XSS attack folder`, () => {
-      const maliciousFolder = {
+    context(`Given an XSS attack author`, () => {
+      const maliciousauthor = {
         id: 913,
-        folder_name: 'Naughty naughty very naughty <script>alert("xss");</script>',
+        author_name: 'Naughty naughty very naughty <script>alert("xss");</script>',
       }
-      beforeEach('insert malicious folder', () => {
+      beforeEach('insert malicious author', () => {
         return db
           .into('authors')
-          .insert([maliciousFolder])
+          .insert([maliciousauthor])
       })
       it('removes XSS attack content', () => {
         return supertest(app)
-          .get(`/api/authors/${maliciousFolder.id}`)
+          .get(`/api/authors/${maliciousauthor.id}`)
           .expect(200)
           .expect(res => {
-            expect(res.body.folder_name).to.eql('Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;')
+            expect(res.body.author_name).to.eql('Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;')
           })
       })
     })
   })
 
   describe(`POST /api/authors`, () => {
-    it(`creates a folder, responding with 201 and the new folder`, function () {
+    it(`creates a author, responding with 201 and the new author`, function () {
       this.retries(3);
-      const newFolder = {
-        folder_name: 'This Is a Test Folder Name',
-        folder_id: 9999
+      const newauthor = {
+        author_name: 'This Is a Test author Name',
+        author_id: 9999
       }
       return supertest(app)
         .post('/api/authors')
-        .send(newFolder)
+        .send(newauthor)
         .expect(201)
         .expect(res => {
-          expect(res.body.folder_name).to.eql(newFolder.folder_name)
+          expect(res.body.author_name).to.eql(newauthor.author_name)
           expect(res.body).to.have.property('id')
           expect(res.headers.location).to.eql(`/api/authors/${res.body.id}`)
         })
@@ -141,35 +141,35 @@ describe('authors Endpoints', () => {
             .expect(postRes.body)
         )
     })
-    const requiredFields = ['folder_name']
+    const requiredFields = ['author_name']
 
     requiredFields.forEach(field => {
-      const newFolder = {
-        folder_name: 'This Is a Test Folder Name'
+      const newauthor = {
+        author_name: 'This Is a Test author Name'
       }
       it(`responds with 400 and an error message when the '${field}' is missing`, () => {
-        delete newFolder[field]
+        delete newauthor[field]
         return supertest(app)
           .post('/api/authors')
-          .send(newFolder)
+          .send(newauthor)
           .expect(400, {
             error: { message: `Missing '${field}' in request body` }
           })
       })
     })
 
-    context(`Given an XSS attack folder`, () => {
-      it(`removes any XSS attack content, and creates a folder, responding with 201`, function () {
-        const maliciousFolder = {
+    context(`Given an XSS attack author`, () => {
+      it(`removes any XSS attack content, and creates a author, responding with 201`, function () {
+        const maliciousauthor = {
             id: 914,
-            folder_name: 'Naughty naughty very naughty <script>alert("xss");</script>'
+            author_name: 'Naughty naughty very naughty <script>alert("xss");</script>'
         }
         return supertest(app)
           .post('/api/authors')
-          .send(maliciousFolder)
+          .send(maliciousauthor)
           .expect(201)
           .expect(res => {
-            expect(res.body.folder_name).to.eql('Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;')
+            expect(res.body.author_name).to.eql('Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;')
           })
       })
     })

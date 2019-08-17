@@ -2,7 +2,6 @@ const path = require('path')
 const express = require('express')
 const xss = require('xss')
 const genresService = require('./genres-service')
-
 const genresRouter = express.Router()
 const jsonParser = express.json()
 
@@ -47,7 +46,7 @@ genresRouter
   })
 
 genresRouter
-  .route('/:genres')
+  .route('/:genres_id')
   .all((req, res, next) => {
     genresService.getById(
       req.app.get('db'),

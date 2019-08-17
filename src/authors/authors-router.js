@@ -1,18 +1,18 @@
 const path = require('path')
 const express = require('express')
 const xss = require('xss')
-const AauthorsService = require('./authors-service')
+const AuthorsService = require('./authors-service')
 
 const authorsRouter = express.Router()
 const jsonParser = express.json()
 
 const serializeAuthor = author => ({
   id: author.id,
-  author_titles: xss(author.author_titles),
+  titles: xss(author.author_titles),
 })
 
 authorsRouter
-  .route('/')
+  .route('/:author')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
     AuthorsService.getAllauthors(knexInstance)
@@ -47,7 +47,7 @@ authorsRouter
 authorsRouter
   .route('/:authors')
   .all((req, res, next) => {
-    authorsService.getById(
+    authorsService.getByAuthor(
       req.app.get('db'),
       req.params.author_id
     )
