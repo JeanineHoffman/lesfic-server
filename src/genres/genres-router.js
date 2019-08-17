@@ -47,7 +47,7 @@ genresRouter
   })
 
 genresRouter
-  .route('/:genre_id')
+  .route('/:genres')
   .all((req, res, next) => {
     genresService.getById(
       req.app.get('db'),

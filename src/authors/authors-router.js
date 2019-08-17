@@ -45,7 +45,7 @@ authorsRouter
   })
 
 authorsRouter
-  .route('/:author_id')
+  .route('/:authors')
   .all((req, res, next) => {
     authorsService.getById(
       req.app.get('db'),
