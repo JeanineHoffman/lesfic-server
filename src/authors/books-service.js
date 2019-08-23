@@ -1,4 +1,4 @@
-const AuthorsService = {
+const BooksService = {
   getAllAuthors(knexInstance) {
       return knexInstance.select('*').from('books')
   },
@@ -12,4 +12,4 @@ const AuthorsService = {
   }
 }
 
-module.exports = AuthorsService
+module.exports = BooksService

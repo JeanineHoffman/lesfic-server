@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 const xss = require('xss')
 const booksService = require('./books-service')
-const booksRouter = express.Router()
+const BooksRouter = express.Router()
 const jsonParser = express.json()
 
 const serializeAuthor = book => ({
@@ -10,11 +10,11 @@ const serializeAuthor = book => ({
   titles: xss(book.title),
 })
 
-booksRouter
+BooksRouter
   .route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
-    booksService.getAllAuthors(knexInstance)
+    BooksService.getAllAuthors(knexInstance)
       .then(authors => {
         res.json(authors)
       })
@@ -22,7 +22,7 @@ booksRouter
   })
 //where clauses querie parameters
 
-booksRouter
+BooksRouter
   .route('/:search')
   .all((req, res, next) => {
     booksService.getByAuthor(
@@ -44,4 +44,4 @@ booksRouter
     res.json(author)
   })
 
-module.exports = booksRouter
+module.exports = BooksRouter
