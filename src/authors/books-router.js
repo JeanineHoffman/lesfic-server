@@ -1,7 +1,7 @@
 const path = require('path')
 const express = require('express')
 const xss = require('xss')
-const booksService = require('./books-service')
+const BooksService = require('./books-service')
 const BooksRouter = express.Router()
 const jsonParser = express.json()
 
@@ -25,9 +25,9 @@ BooksRouter
 BooksRouter
   .route('/:search')
   .all((req, res, next) => {
-    booksService.getByAuthor(
+    BooksService.getByAuthor(
       req.app.get('db'),
-      req.params.author_name
+      req.params.author
     )
       .then(author => {
         if (!author) {
