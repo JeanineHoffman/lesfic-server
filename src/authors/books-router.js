@@ -14,6 +14,9 @@ BooksRouter
   .route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
+    console.log("BooksRouter:get:knexInstance ", knexInstance);
+    
+
     BooksService.getAllAuthors(knexInstance)
       .then(authors => {
         res.json(authors)
