@@ -4,5 +4,5 @@ module.exports = {
   DB_URL: process.env.DATABASE_URL || 'postgresql://Jeanine@localhost/lesfic',
   TEST_DB_URL: process.env.TEST_DB_URL || 'postgresql://Jeanine@localhost/lesfic-test',
   API_ENDPOINT: `https://.herokuapp.com/`,
-API_KEY: process.env.REACT_APP_API_KEY,
+// API_KEY: process.env.REACT_APP_API_KEY,
 }

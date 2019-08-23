@@ -1,6 +1,7 @@
 // verify this page with fresh eyes
 
 require('dotenv').config()
+const booksRouter = require('./authors/books-router')
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -17,6 +18,9 @@ const morganOption = (NODE_ENV === 'production')
 app.use(morgan(morganOption))
 app.use(cors())
 app.use(helmet())
+
+app.use('/books', booksRouter)
+// app.use('/books/genres', genresRouter)
 
 app.get('/', (req, res) => {
   res.send('Hello, world!')
