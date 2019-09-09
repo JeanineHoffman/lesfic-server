@@ -5,7 +5,7 @@ const app = require('../src/app');
 const { makeBooksArray } = require('./books.fixtures');
 
 
-describe('books endpoint', () => {
+describe.only('books endpoint', () => {
   let db;
 
   before('Make knex instance', () => {
@@ -25,7 +25,7 @@ describe('books endpoint', () => {
   afterEach('cleanup', () => db.raw('TRUNCATE books RESTART IDENTITY CASCADE'))
 
   describe.only(`GET /api/books`, () => {
-    context.only(`given a list of books`, () => {
+    context.only(`given an author name`, () => {
       it(`responds with 200`, () => {
         return supertest(app)
           .get('/api/books')
@@ -33,19 +33,19 @@ describe('books endpoint', () => {
       })
     })
 
-    context('Given there are books in the database', () => {
-      const testbooks = makeBooksArray();
-      beforeEach('Insert books', () => {
-        return db
-          .into('books')
-          .insert(testbooks)
-      })
-      it('responds with 200 and all of the books', () => {
-        return supertest(app)
-          .get('/api/books')
-          .expect(200, testbooks)
-      })
-    })
+    // context('Given there are books in the database', () => {
+    //   const testbooks = makeBooksArray();
+    //   beforeEach('Insert books', () => {
+    //     return db
+    //       .into('books')
+    //       .insert(testbooks)
+    //   })
+    //   it('responds with 200 and all of the books', () => {
+    //     return supertest(app)
+    //       .get('/api/books')
+    //       .expect(200, testbooks)
+    //   })
+    // })
 
     context(`Given an XSS attack author`, () => {
       const maliciousauthor = {
@@ -73,12 +73,12 @@ describe('books endpoint', () => {
   })
 
   describe.only(`GET /api/books/:author_id`, () => {
-    context.only(`Given no books`, () => {
-      it(`responds with 404`, () => {
+    context.only(`Given books`, () => {
+      it(`responds with 200`, () => {
         const authorId = 123456
         return supertest(app)
           .get(`/api/books/${authorId}`)
-          .expect(404, { error: { message: `author doesn't exist` } })
+          .expect(200, [] })
       })
     })
 
