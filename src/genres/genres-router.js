@@ -18,7 +18,6 @@ GenreRouter
     const knexInstance = req.app.get('db')
     genreService.getByGenre(knexInstance)
       .then(authors => {
-        // res.json(authors.map(author => serializeAuthor(author)))
         res.json(genre)
       })
       .catch(next)

@@ -23,7 +23,6 @@ BooksRouter
       })
       .catch(next)
   })
-//where clauses querie parameters
 
 BooksRouter
   .route('/:author')
@@ -38,14 +37,11 @@ BooksRouter
             error: { message: `author doesn't have books in our system` }
           })
         }
-        // res.author = author
         return res.status(200).json(books)
         next()
       })
       .catch(next)
   })
-  // .get((req, res, next) => {
-  //   res.json(author)
-  // })
+  
 
 module.exports = BooksRouter
