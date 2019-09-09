@@ -24,11 +24,11 @@ describe.only('books endpoint', () => {
   before('clean the table', () => db.raw('TRUNCATE books RESTART IDENTITY CASCADE'))
   afterEach('cleanup', () => db.raw('TRUNCATE books RESTART IDENTITY CASCADE'))
 
-  describe.only(`GET /api/books`, () => {
+  describe.only(`GET /books`, () => {
     context.only(`given an author name`, () => {
       it(`responds with 200`, () => {
         return supertest(app)
-          .get('/api/books')
+          .get('/books')
           .expect(200, [])
       })
     })
@@ -42,7 +42,7 @@ describe.only('books endpoint', () => {
     //   })
     //   it('responds with 200 and all of the books', () => {
     //     return supertest(app)
-    //       .get('/api/books')
+    //       .get('//books')
     //       .expect(200, testbooks)
     //   })
     // })
@@ -63,7 +63,7 @@ describe.only('books endpoint', () => {
       })
       it('responds with 200 and all of the books, none of which contains XSS attack content', () => {
         return supertest(app)
-          .get('/api/books')
+          .get('/books')
           .expect(200)
           .expect(res => {
             expect(res.body[0].author_name).to.eql(sanitizedbooks[0].author_name)
@@ -72,13 +72,13 @@ describe.only('books endpoint', () => {
     })
   })
 
-  describe.only(`GET /api/books/:author_id`, () => {
+  describe.only(`GET /books/:author`, () => {
     context.only(`Given books`, () => {
       it(`responds with 200`, () => {
-        const authorId = 123456
+        const author = 'no author'
         return supertest(app)
-          .get(`/api/books/${authorId}`)
-          .expect(200, [] })
+          .get(`/books/${author}`)
+          .expect(404)
       })
     })
 
@@ -93,7 +93,7 @@ describe.only('books endpoint', () => {
         const authorId = 2
         const expectedauthor = testbooks[authorId - 1]
         return supertest(app)
-          .get(`/api/books/${authorId}`)
+          .get(`/books/${authorId}`)
           .expect(200, expectedauthor)
       })
     })
@@ -111,7 +111,7 @@ describe.only('books endpoint', () => {
       })
       it('removes XSS attack content', () => {
         return supertest(app)
-          .get(`/api/books/${maliciousauthor.id}`)
+          .get(`/books/${maliciousauthor.id}`)
           .expect(200)
           .expect(res => {
             expect(res.body.author_name).to.eql('bob jones')
@@ -120,7 +120,7 @@ describe.only('books endpoint', () => {
     })
   })
     
-  describe(`POST /api/books`, () => {
+  describe(`POST /books`, () => {
     it(`creates a author, responding with 201 and the new author`, function () {
       this.retries(3);
       const newauthor = {
@@ -128,17 +128,17 @@ describe.only('books endpoint', () => {
         author_id: 9999
       }
       return supertest(app)
-        .post('/api/books')
+        .post('/books')
         .send(newauthor)
         .expect(201)
         .expect(res => {
           expect(res.body.author_name).to.eql(newauthor.author_name)
           expect(res.body).to.have.property('id')
-          expect(res.headers.location).to.eql(`/api/books/${res.body.id}`)
+          expect(res.headers.location).to.eql(`//books/${res.body.id}`)
         })
         .then(postRes =>
           supertest(app)
-            .get(`/api/books/${postRes.body.id}`)
+            .get(`/books/${postRes.body.id}`)
             .expect(postRes.body)
         )
     })
@@ -151,7 +151,7 @@ describe.only('books endpoint', () => {
       it(`responds with 400 and an error message when the '${field}' is missing`, () => {
         delete newauthor[field]
         return supertest(app)
-          .post('/api/books')
+          .post('/books')
           .send(newauthor)
           .expect(400, {
             error: { message: `Missing '${field}' in request body` }
@@ -166,7 +166,7 @@ describe.only('books endpoint', () => {
           author_name: 'bob jones <script>alert("xss");</script>'
         }
         return supertest(app)
-          .post('/api/books')
+          .post('/books')
           .send(maliciousauthor)
           .expect(201)
           .expect(res => {
