@@ -3,12 +3,12 @@ const BooksService = {
       return knexInstance.select('*').from('books')
   },
 
-  getById(knexInstance, AuthorsID) {
+  getByAuthor(knexInstance, author) {
       return knexInstance
           .from('books')
           .select('*')
-          .where('id', AuthorsID)
-          .first()
+          .where("author", author)
+          .first() //might need to remove
   }
 }
 

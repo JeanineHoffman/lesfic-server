@@ -1,26 +1,21 @@
-# Express Boilerplate!
+# Name: LesFic Rate Your Reads
 
-This is a boilerplate project used for starting new projects!
+## Link to live app: "https://lesfic-rate-your-reads.jeaninehoffman1970.now.sh/"
 
-## Set up
+### Link to client side repo: "https://github.com/JeanineHoffman/LesFic-Rate-Your-Reads.git"
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+#### link to  server side repo: "https://github.com/JeanineHoffman/lesfic-server.git"
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+#### documentation link: "https://documenter.getpostman.com/view/6710319/SVmpX22u"
 
-## Scripts
+##### screenshots:Landing page: <img src="./src/img/landingPage.png" alt="landingpage screenshot" height="300px" /> 
 
-Start the application `npm start`
+##### Search page: <img src="./src/img/searchpageB4.png" alt="search screenshot before a search happens" height="300px"/> 
 
-Start nodemon for the application `npm run dev`
+###### Search page: <img src="./src/img/searchResults.png" alt="search results screen shot for a selected author and her books listed" height="300px"/> 
 
-Run the tests `npm test`
+###### <p>The user is able to search for something new to read by listing all books by specific authors or if the user prefers they can search for a book based on what sub-genre (under the genre of lesbian fiction) by using the drop down menu and selecting the genre. Future iterations will have a place for users to enter new books and authors to the DB with (hopefully) a check on spelling by confirming against Amazon or GoodReads. There is also a plan for the rating system to go live as well as accounts being set up to save searchs</p>
 
-## Deploying
+###### tech stack: html, JS, JQuery, React, Node.js, express, Knex and Psql. Deployed via ZEIT and Heroku.
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+###### Designed and written by Jeanine Hoffman with assitance by my cohort, instructors, and my mentor

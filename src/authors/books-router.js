@@ -26,25 +26,26 @@ BooksRouter
 //where clauses querie parameters
 
 BooksRouter
-  .route('/:search')
-  .all((req, res, next) => {
+  .route('/:author')
+  .get((req, res, next) => {
     BooksService.getByAuthor(
       req.app.get('db'),
       req.params.author
     )
-      .then(author => {
-        if (!author) {
+      .then(books => {
+        if (!books) {
           return res.status(404).json({
-            error: { message: `author doesn't exist` }
+            error: { message: `author doesn't have books in our system` }
           })
         }
-        res.author = author
+        // res.author = author
+        return res.status(200).json(books)
         next()
       })
       .catch(next)
   })
-  .get((req, res, next) => {
-    res.json(author)
-  })
+  // .get((req, res, next) => {
+  //   res.json(author)
+  // })
 
 module.exports = BooksRouter
