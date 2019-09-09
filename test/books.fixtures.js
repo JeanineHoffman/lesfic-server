@@ -1,4 +1,4 @@
-function makeAuthorsArray() {
+function makeBooksArray() {
   return [
     {
       id: 1,
@@ -24,5 +24,5 @@ function makeAuthorsArray() {
 }
 
 module.exports = {
-  makeAuthorsArray,
+  makeBooksArray,
 }
