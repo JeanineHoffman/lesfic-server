@@ -39,7 +39,7 @@ BooksRouter
       .then(author => {
         res
           .status(201)
-          .location(path.posix.join(req.originalUrl, `/${books}`))
+          .location(path.posix.join(req.originalUrl, `/${author}`))
           .json(serializeAuthor(author))
       })
       .catch(next)
