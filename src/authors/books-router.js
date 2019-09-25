@@ -15,7 +15,7 @@ BooksRouter
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
     console.log("BooksRouter:get:knexInstance ", knexInstance);
-    
+
 
     BooksService.getAllAuthors(knexInstance)
       .then(authors => {
@@ -23,6 +23,28 @@ BooksRouter
       })
       .catch(next)
   })
+  .post(jsonParser, (req, res, next) => {
+    const { author, title, genre } = req.body
+    const newAuthor = { author, title, genre }
+
+    for (const [key, value] of Object.entries(newAuthor))
+      if (value == null)
+        return res.status(400).json({
+          error: { message: `Missing '${key}' in request` }
+        })
+    BooksService.insertAuthor(
+      req.app.get('db'),
+      newAuthor
+    )
+      .then(author => {
+        res
+          .status(201)
+          .location(path.posix.join(req.originalUrl, `/${author}`))
+          .json(serializeAuthor(author))
+      })
+      .catch(next)
+  })
+
 
 BooksRouter
   .route('/:author')
@@ -42,6 +64,7 @@ BooksRouter
       })
       .catch(next)
   })
-  
+
+
 
 module.exports = BooksRouter
