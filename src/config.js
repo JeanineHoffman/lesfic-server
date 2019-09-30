@@ -3,6 +3,6 @@ module.exports = {
   NODE_ENV: process.env.NODE_ENV || 'development',
   DB_URL: process.env.DATABASE_URL || 'postgresql://Jeanine@localhost/lesfic',
   TEST_DB_URL: process.env.TEST_DB_URL || 'postgresql://Jeanine@localhost/lesfic-test',
-  API_ENDPOINT: `https://lesfic.herokuapp.com/`,
+  API_ENDPOINT: `https://lesficreads.herokuapp.com/`,
 // API_KEY: process.env.REACT_APP_API_KEY,
 }
