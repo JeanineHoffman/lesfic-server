@@ -1,6 +1,6 @@
 # Name: LesFic Rate Your Reads
 
-## Link to live app: "https://lesfic-rate-your-reads.jeaninehoffman1970.now.sh/"
+## Link to live app: "https://lesfic-rate-your-reads.jeaninehoffman.now.sh/"
 
 ### Link to client side repo: "https://github.com/JeanineHoffman/LesFic-Rate-Your-Reads.git"
 
