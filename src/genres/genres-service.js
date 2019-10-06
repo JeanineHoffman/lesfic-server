@@ -11,6 +11,15 @@ const genreService = {
       .where('id', genre)
       .first()
   },
+  insertGenre(knex, newGenre) {
+    return knex
+      .insert(newGenre)
+      .into('books')
+      .returning('*')
+      .then(rows => {
+        return rows[0]
+      })
+  },
 }
 
 module.exports = genreService

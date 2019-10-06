@@ -9,20 +9,42 @@ const serializegenre = books => ({
   id: books.id,
   genre: xss(books.genre),
   title: xss(books.title),
-  author: books.author,
+  author: xss(books.author),
 })
 
 GenreRouter
-  .route('/')
+  . .route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
-    genreService.getByGenre(knexInstance)
-      .then(authors => {
-        res.json(genre)
-      })
-      .catch(next)
-  })
-  
+    // console.log("BooksRouter:get:knexInstance ", knexInstance);
+
+    BooksService.getAllGenres(knexInstance)
+    .then(genres => {
+      res.json(authors)
+    })
+    .catch(next)
+})
+.post(jsonParser, (req, res, next) => {
+  const { author, title, genre } = req.body
+  const newGenre = { author, title, genre }
+  for (const [key, value] of Object.entries(newGenre))
+  if (value == null)
+    return res.status(400).json({
+      error: { message: `Missing '${key}' in request` }
+    })
+    GenresService.insertGenre(
+      req.app.get('db'),
+      newGenre
+    )  
+    .then(genre => {
+      res
+        .status(201)
+        .location(path.posix.join(req.originalUrl, `/${genre}`))
+        .json(serializeGenre(genre))
+    })
+    .catch(next)
+})
+
 genresRouter
   .route('/:books')
   .all((req, res, next) => {
