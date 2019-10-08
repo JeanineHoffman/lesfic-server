@@ -6,29 +6,7 @@
 
 #### link to  server side repo: "https://github.com/JeanineHoffman/lesfic-server.git"
 
-#### DOCUMENTATION link: "https://documenter.getpostman.com/view/6710319/SVmpX22u"
-
-Lesfic Rate Your Reads
-
-Introduction
-finds the books an author on file has published or allows the user to search by genre within the larger genre of lesbian fiction
-
-Overview
-mvp version, plenty to add and files are started towards that goal
-
-Authentication
-What is the preferred way of using the API? through the app at: https://lesfic-rate-your-reads.jeaninehoffman1970.now.sh/
-
-Error Codes
-for now, none-use of drop down menus prevents mispellings once I add the ability to add books I'll use error handling and compare names to what is available on Amazon
-
-Rate limit
-100 builds per day on Zeit.
-
-Language
-GET https://lesfic.herokuapp.com/books
-https://lesfic.herokuapp.com/books
-capstone api
+#### documentation link: "https://documenter.getpostman.com/view/6710319/SVmpX22u"
 
 ##### screenshots:Landing page: <img src="./src/img/landingPage.png" alt="landingpage screenshot" height="300px" /> 
 
