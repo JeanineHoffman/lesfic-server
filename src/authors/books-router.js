@@ -26,14 +26,15 @@ BooksRouter
   .post(jsonParser, (req, res, next) => {
     const { author, title, genre } = req.body
     const newAuthor = { author, title, genre }
+    
     if (!author) {
       return res
-        .status(400)
+        .status(406) //406 is 'not acceptable' bv the conent is not correct
         .send('Author Name Required');
     }
     if (!title) {
       return res
-        .status(400)
+        .status(406)//406 is 'not acceptable' bv the conent is not correct
         .send('Book Title Required');
     }
 
