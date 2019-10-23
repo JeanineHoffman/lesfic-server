@@ -26,12 +26,23 @@ BooksRouter
   .post(jsonParser, (req, res, next) => {
     const { author, title, genre } = req.body
     const newAuthor = { author, title, genre }
+    if (!author) {
+      return res
+        .status(400)
+        .send('Author Name Required');
+    }
+    if (!title) {
+      return res
+        .status(400)
+        .send('Book Title Required');
+    }
 
     for (const [key, value] of Object.entries(newAuthor))
       if (value == null)
         return res.status(400).json({
           error: { message: `Missing '${key}' in request` }
         })
+
     BooksService.insertAuthor(
       req.app.get('db'),
       newAuthor
