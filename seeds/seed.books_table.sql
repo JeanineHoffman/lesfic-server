@@ -1,11 +1,11 @@
 BEGIN;
-
 TRUNCATE TABLE
   books
   RESTART IDENTITY CASCADE;
-
 INSERT INTO books (genre, title, author)
-VALUES
+VALUES 
+
+
 ('scifi', 'The Caphenon (Chronicles of Alsea Volume 1)','Fletcher DeLancey'),
 ('scifi', 'Without A Front: The Producer''s Challenge (Chronicles of Alsea Book 2)','Fletcher DeLancey'),
 ('scifi', 'Without A Front: The Warrior''s Challenge (Chronicles of Alsea Book 3)','Fletcher DeLancey'),
