@@ -9,7 +9,8 @@
     "predeploy": "npm audit && npm run migrate-production",
     "deploy": "git push heroku master",
     "migrate": "postgrator --config src/postgrator-config.js",
-    "migrate:production": "postgrator --config src/postgrator-production-config.js"
+    "migrate-production": "postgrator --config src/postgrator-production-config.js",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "keywords": [],
   "engines": {

@@ -9,7 +9,7 @@ module.exports = {
     "port": process.env.MIGRATION_DB_PORT,
     "database": process.env.MIGRATION_DATABASE_NAME,
     "username": process.env.MIGRATION_DATABASE_USER,
-    // "password": process.env.MIGRATION_DB_PASS,
+    "password": process.env.MIGRATION_DB_PASS,
     "validateChecksums": false,
     "ssl": false
 }
