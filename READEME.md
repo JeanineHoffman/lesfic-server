@@ -47,7 +47,7 @@ Elena Graf              Lies of Omission    Historical Fiction
 E.J. Noyes              Ask Me Again        General Fiction
 Heather Jane            Turn Fourty With Me  Poetry
 
-"https://lesfic-rate-your-reads.jeaninehoffman.now.sh/"
+"https://lesfic-rate-your-reads-git-master.jeaninehoffman.now.sh/"
 
     Link to client side repo: "https://github.com/JeanineHoffman/LesFic-Rate-Your-Reads.git"
 
