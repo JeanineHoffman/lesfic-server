@@ -22,7 +22,7 @@
   How does the user experiance this wonderful app? Its very simple by design. No one wants to waste time so you get a landing page that offers only two options: Search or add books.
   Search takes you to the search view where you can search by Author names using a drop down menu. If we don't have the name you are searching for, there is an add book button available on this page view as well. Otherwise, choose and author and find all the books we have listed for that specific author. 
 
-  Alternitivly, choose the drop down for genres. Perhpas, like me, you have a favorite genre but you feel like you've read all the decent books out there. Well, confirm it or be surprised then a search of your sub-genre (lesbian fiction being the primary) finds a list of books with unfamiliar titles in your favorite genre! Rejoice, download from the seller of your choice and happy reading! It's really that simple yet it doesn't exist anywhere as of yet.
+  Alternatively, choose the drop down for genres. Perhpas, like me, you have a favorite genre but you feel like you've read all the decent books out there. Well, confirm it or be surprised then a search of your sub-genre (lesbian fiction being the primary) finds a list of books with unfamiliar titles in your favorite genre! Rejoice, download from the seller of your choice and happy reading! It's really that simple yet it doesn't exist anywhere as of yet.
 
   For the Add a book page there is a simply text input form for the author name, the book title, and a drop down for genre as listed on Amazon or Bella. 
 
