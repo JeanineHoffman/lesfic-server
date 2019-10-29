@@ -25,7 +25,6 @@ BooksRouter
   })
   .post(jsonParser, (req, res, next) => {
     const { author, title, genre } = req.body
-    console.log(author);
     const newAuthor = { author, title, genre }
     
     if (!author) {
